@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 300px;
+    margin: 50px 20px;
 }
 
 .music-sheet-wrapper {
@@ -53,4 +55,18 @@
     border: 0;
     background: none;
     text-align: center;
+}
+.intensity-tracker {
+    width: 300px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin: 20px;
+}
+.intensity-tracker-bar {
+    height: 0;
+    width: 20px;
+    background-color: red;
+    border: solid 1px black;
 }

@@ -3,6 +3,7 @@ import './Player.css';
 import { Input, Note, Output, WebMidi } from "webmidi/dist/esm/webmidi.esm";
 import { drumKit, Instruments } from "../DrumKit";
 import { Hand, musicSheet } from "../MusicSheet";
+import { intensityTracker } from "../IntensityTracker";
 
 function usePlayer() {
   const [isLoading, setIsLoading] = useState(false);
@@ -46,6 +47,8 @@ function usePlayer() {
       activeInput.addListener('noteon', e => {
         console.log('noteon', e);
 
+        intensityTracker.append(e.note.attack);
+
         switch (e.note.name + e.note.octave) {
           case 'F2':
             drumKit.playDrumNote(Instruments.HiHat);
@@ -81,6 +84,11 @@ function usePlayer() {
         Hand.R, Hand.L, Hand.R, Hand.L,
         Hand.R, Hand.L, Hand.R, Hand.L
       ])
+    }
+
+    const intensity = document.getElementById('intensity');
+    if (!!intensity) {
+      intensityTracker.init(intensity);
     }
   }, [activeInput]);
 
@@ -139,14 +147,13 @@ export function Player() {
 
   function onTest() {
     if (activeOutput && note) {
-      console.log('Playing', note.name + note.octave, 'for', quarterNoteDuration + 'ms')
+      console.log('Playing', note.name + note.octave, 'for', quarterNoteDuration + 'ms');
       activeOutput.playNote(note, { duration: quarterNoteDuration });
     }
   }
 
   function setPlayNote(instrument: Instruments, shortcut: string) {
     return () => {
-      console.log('playing', instrument, `shortcut: `, shortcut);
       drumKit.playDrumNote(instrument);
     };
   }
@@ -226,6 +233,9 @@ export function Player() {
           </div>
           <div>
             <div id='canvas'/>
+          </div>
+          <div>
+            <div id='intensity' />
           </div>
         </>
       )}

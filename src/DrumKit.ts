@@ -182,7 +182,7 @@ class DrumKit {
   }
 
   drawPlayHead(xIndex: number) {
-    const lastIndex = (xIndex + 15) % 16;
+    const lastIndex = xIndex === 0 ? 14 : xIndex - 1;
 
     const elNew = document.getElementById('LED_' + xIndex) as HTMLImageElement;
     const elOld = document.getElementById('LED_' + lastIndex) as HTMLImageElement;
