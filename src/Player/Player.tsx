@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './Player.css';
-import { WebMidi, Input, Output, Note } from "webmidi/dist/esm/webmidi.esm";
-import { useEffect, useState } from 'react';
+import { Input, Note, Output, WebMidi } from "webmidi/dist/esm/webmidi.esm";
 import { drumKit, Instruments } from "../DrumKit";
+import { Hand, musicSheet } from "../MusicSheet";
 
 function usePlayer() {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,11 +45,42 @@ function usePlayer() {
     if (activeInput) {
       activeInput.addListener('noteon', e => {
         console.log('noteon', e);
+
+        switch (e.note.name + e.note.octave) {
+          case 'F2':
+            drumKit.playDrumNote(Instruments.HiHat);
+            break;
+          case 'G2':
+            drumKit.playDrumNote(Instruments.Snare);
+            break;
+          case 'A2':
+            drumKit.playDrumNote(Instruments.Kick);
+            break;
+          case 'B2':
+            drumKit.playDrumNote(Instruments.Tom1);
+            break;
+          case 'C3':
+            drumKit.playDrumNote(Instruments.Tom2);
+            break;
+          case 'D3':
+            drumKit.playDrumNote(Instruments.Tom3);
+            break;
+        }
       });
 
       activeInput.addListener('noteoff', e => {
         console.log('noteoff', e);
       });
+    }
+
+    const canvas = document.getElementById('canvas');
+    if (!!canvas) {
+      musicSheet.draw(canvas, [
+        Hand.R, Hand.L, Hand.R, Hand.L,
+        Hand.R, Hand.L, Hand.R, Hand.L,
+        Hand.R, Hand.L, Hand.R, Hand.L,
+        Hand.R, Hand.L, Hand.R, Hand.L
+      ])
     }
   }, [activeInput]);
 
@@ -177,21 +208,24 @@ export function Player() {
             <button onClick={setPlayNote(Instruments.Tom3, 'u')}>Tom 3 (u)</button>
           </div>
           <div className='led-rows' id='LED_row'>
-            <img id='LED_0' src='images/LED_off.png' />
-            <img id='LED_1' src='images/LED_off.png' />
-            <img id='LED_2' src='images/LED_off.png' />
-            <img id='LED_3' src='images/LED_off.png' />
-            <img id='LED_4' src='images/LED_off.png' />
-            <img id='LED_5' src='images/LED_off.png' />
-            <img id='LED_6' src='images/LED_off.png' />
-            <img id='LED_7' src='images/LED_off.png' />
-            <img id='LED_8' src='images/LED_off.png' />
-            <img id='LED_9' src='images/LED_off.png' />
-            <img id='LED_10' src='images/LED_off.png' />
-            <img id='LED_11' src='images/LED_off.png' />
-            <img id='LED_12' src='images/LED_off.png' />
-            <img id='LED_13' src='images/LED_off.png' />
-            <img id='LED_14' src='images/LED_off.png' />
+            <img id='LED_0' src='images/LED_off.png'/>
+            <img id='LED_1' src='images/LED_off.png'/>
+            <img id='LED_2' src='images/LED_off.png'/>
+            <img id='LED_3' src='images/LED_off.png'/>
+            <img id='LED_4' src='images/LED_off.png'/>
+            <img id='LED_5' src='images/LED_off.png'/>
+            <img id='LED_6' src='images/LED_off.png'/>
+            <img id='LED_7' src='images/LED_off.png'/>
+            <img id='LED_8' src='images/LED_off.png'/>
+            <img id='LED_9' src='images/LED_off.png'/>
+            <img id='LED_10' src='images/LED_off.png'/>
+            <img id='LED_11' src='images/LED_off.png'/>
+            <img id='LED_12' src='images/LED_off.png'/>
+            <img id='LED_13' src='images/LED_off.png'/>
+            <img id='LED_14' src='images/LED_off.png'/>
+          </div>
+          <div>
+            <div id='canvas'/>
           </div>
         </>
       )}

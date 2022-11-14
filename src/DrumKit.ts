@@ -14,8 +14,8 @@ export const INSTRUMENTS_AUDIO: { [key: string]: string; } = {
 const BEAT_RESET = {
   "kitIndex": 0,
   "effectIndex": 0,
-  "tempo": 100,
-  "swingFactor": 0,
+  "tempo": 60,
+  "swingFactor": 0.5419847328244275,
   "effectMix": 0.25,
   "kickPitchVal": 0.5,
   "snarePitchVal": 0.5,
@@ -23,12 +23,18 @@ const BEAT_RESET = {
   "tom1PitchVal": 0.5,
   "tom2PitchVal": 0.5,
   "tom3PitchVal": 0.5,
-  [Instruments.Kick]: [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-  [Instruments.Snare]: [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0],
-  [Instruments.HiHat]: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  // [Instruments.Kick]: [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+  // [Instruments.Snare]: [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+  // [Instruments.HiHat]: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  // [Instruments.Tom1]: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  // [Instruments.Tom2]: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  // [Instruments.Tom3]: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  [Instruments.Kick]: [2, 2, 0, 1, 2, 2, 0, 1, 2, 2, 0, 1, 2, 2, 0, 1],
+  [Instruments.Snare]: [0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0],
+  [Instruments.HiHat]: [2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1],
   [Instruments.Tom1]: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [Instruments.Tom2]: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [Instruments.Tom3]: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  [Instruments.Tom2]: [0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0],
+  [Instruments.Tom3]: [1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0]
 };
 
 const VOLUMES = [0, 0.3, 1];
